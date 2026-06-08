@@ -6,7 +6,7 @@ except ImportError:
     os.system('pip install PyPDF2')
     import PyPDF2
 
-def extract_text_from_pdfs(pdf_dir, output_file, pages_to_read=2, char_limit=3000):
+def extract_text_from_pdfs(pdf_dir, output_file, pages_to_read=5, char_limit=10000):
     with open(output_file, 'w', encoding='utf-8') as out:
         for filename in os.listdir(pdf_dir):
             if filename.endswith('.pdf'):
@@ -29,8 +29,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Extract text from PDF papers')
     parser.add_argument('--input_dir', required=True, help='Directory containing PDF papers')
     parser.add_argument('--output_file', required=True, help='Output text file path')
-    parser.add_argument('--pages', type=int, default=2, help='Number of pages to read per PDF')
-    parser.add_argument('--chars', type=int, default=3000, help='Character limit per PDF')
+    parser.add_argument('--pages', type=int, default=5, help='Number of pages to read per PDF')
+    parser.add_argument('--chars', type=int, default=10000, help='Character limit per PDF')
     args = parser.parse_args()
     
     extract_text_from_pdfs(args.input_dir, args.output_file, args.pages, args.chars)
