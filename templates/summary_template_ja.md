@@ -4,19 +4,19 @@
 **年/出典**: {Year / Venue}
 
 **研究の動機 (Motivation)**:
-{What academic gap or problem is the paper addressing?}
+{この論文が解決しようとしている学術的なギャップ、背景、または中心的な問題について、詳細かつ複数段落で説明してください。簡潔に済ませないでください。}
 
 **提案手法 (Proposed Method)**:
-{What is the core innovation? Describe the key algorithm, framework, or methodology.}
+{技術的な観点からコアとなる革新性を深く説明してください。主要なアルゴリズム、アーキテクチャ、または理論的枠組みを解説してください。読者が仕組みを完全に理解できるよう、少なくとも2〜3段落書いてください。}
 
 **実装の詳細 (Implementation Details)**:
-{Key algorithmic mechanisms, dataset setups, or experimental configurations.}
+{アルゴリズムのメカニズム、データセット、ハイパーパラメータ、実験設定に関する具体的な詳細を提供してください。}
 
 **実験結果 (Experimental Results)**:
-{Main findings, performance metrics, and comparisons against baselines.}
+{主な発見を網羅的にリストアップしてください。具体的なパフォーマンス指標、数値、および主要なベースラインとの比較を含めてください。}
 
 **コアサマリー (Core Summary)**:
-{A one-sentence takeaway of the entire paper.}
+{論文全体の貢献を1〜2文で簡潔かつ情報量豊かに要約してください。}
 
 **ユーザーのアイデアとの関連性 (Relevance to User's Idea)**:
-{CRITICAL: Analyze how this paper supports, contradicts, or inspires the user's specific research idea. Provide actionable insights.}
+{非常に重要: この論文がユーザーの具体的な研究アイデアをどのように支持、反証、またはインスパイアするかを深く分析してください。具体的で実行可能な洞察や警告を提供してください（少なくとも1〜2段落）。}
