@@ -21,6 +21,7 @@ When invoked, act as an autonomous research assistant and follow these steps. **
 - **Identify Inputs**: Ensure you know the directory containing the PDF papers and the user's specific research idea/topic (ask if not provided).
 - **Extract Text**: Use the script `scripts/extract_pdfs.py` (located in this skill's directory) to extract text from the PDFs. Example: `python path/to/skill/scripts/extract_pdfs.py --input_dir <pdf_dir> --output_file raw_text.txt`.
 - **Generate Summaries**: Create a detailed Markdown summary file for each paper. 
+  - **DEFAULT BEHAVIOR: EXHAUSTIVE SUMMARY**: By default, you MUST generate a summary for EVERY SINGLE PAPER in the directory. Do not filter or select a subset unless the user explicitly instructs you to "only summarize the most relevant ones".
   - **CRITICAL**: Use the templates provided in this skill's `templates/` directory. 
     - `summary_template_en.md` for English
     - `summary_template_zh.md` for Simplified Chinese
