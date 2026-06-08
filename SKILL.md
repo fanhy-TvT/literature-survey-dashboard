@@ -19,9 +19,10 @@ When invoked, act as an autonomous research assistant and follow these steps. **
 
 ### 1. Extract and Summarize Local PDFs
 - **Identify Inputs**: Ensure you know the directory containing the PDF papers and the user's specific research idea/topic (ask if not provided).
-- **Extract Text**: Use the script `scripts/extract_pdfs.py` (located in this skill's directory) to extract text from the PDFs. Example: `python path/to/skill/scripts/extract_pdfs.py --input_dir <pdf_dir> --output_file raw_text.txt`.
+- **Extract Text**: Use the script `scripts/extract_pdfs.py` (located in this skill's directory) to extract text from the PDFs. Example: `python path/to/skill/scripts/extract_pdfs.py --input_dir <pdf_dir> --output_file raw_text.txt --pages 5 --chars 10000`.
 - **Generate Summaries**: Create a detailed Markdown summary file for each paper. 
   - **DEFAULT BEHAVIOR: EXHAUSTIVE SUMMARY**: By default, you MUST generate a summary for EVERY SINGLE PAPER in the directory. Do not filter or select a subset unless the user explicitly instructs you to "only summarize the most relevant ones".
+  - **COMPREHENSIVENESS REQUIRED**: Do not write brief or superficial summaries. You MUST write highly detailed, multi-paragraph explanations for Motivation, Proposed Method, and Experimental Results (including specific numbers/metrics).
   - **CRITICAL**: Use the templates provided in this skill's `templates/` directory. 
     - `summary_template_en.md` for English
     - `summary_template_zh.md` for Simplified Chinese
@@ -31,8 +32,9 @@ When invoked, act as an autonomous research assistant and follow these steps. **
   - **Relevance to User's Idea**: This is the most important section. Analyze how this paper supports, contradicts, or inspires the user's specific research idea.
 
 ### 2. Web Search for Related Papers
-- Based on the user's core idea and the insights gathered from the local papers, use the `WebSearch` tool to find 3-5 recent and highly relevant papers that are NOT in the local directory.
-- Generate the same structured Markdown summaries for these newly found papers, using the user's language.
+- **Robust Literature Retrieval**: Do not just perform one simple search. Formulate 3-5 different search queries based on the user's idea and the insights from local papers. 
+- Find **6-10** recent (last 2-3 years) and highly impactful papers that are NOT in the local directory. Dig deep into the literature tree.
+- Generate the same strictly detailed Markdown summaries for these newly found papers, using the user's language.
 
 ### 3. Generate HTML Dashboard
 - Execute the script `scripts/generate_dashboard.py` (located in this skill's directory) to parse the Markdown summaries and generate the interactive HTML file.
