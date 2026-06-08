@@ -4,19 +4,19 @@
 **年份/來源**: {Year / Venue}
 
 **研究動機 (Motivation)**:
-{What academic gap or problem is the paper addressing?}
+{詳細闡述該論文試圖解決的學術空白、背景或核心問題。不要簡短，請寫出完整的痛點及研究必要性（建議1-2段）。}
 
 **提出的方法 (Proposed Method)**:
-{What is the core innovation? Describe the key algorithm, framework, or methodology.}
+{在技術層面深度描述核心創新點。解釋關鍵演算法、網路架構或理論框架。請寫至少2-3段，確保讀者能完全理解其運作原理。}
 
 **實現細節 (Implementation Details)**:
-{Key algorithmic mechanisms, dataset setups, or experimental configurations.}
+{提供具體的演算法機制、資料集、超參數設置以及實驗配置細節。}
 
 **實驗結果 (Experimental Results)**:
-{Main findings, performance metrics, and comparisons against baselines.}
+{全面列出主要發現。必須包含具體的性能指標、數據以及與核心基線的對比結果。指出其取得SOTA的具體任務。}
 
 **核心內容總結 (Core Summary)**:
-{A one-sentence takeaway of the entire paper.}
+{用1-2句話精煉但資訊量極大地概括整篇論文的核心貢獻。}
 
 **與用戶想法的關聯 (Relevance to User's Idea)**:
-{CRITICAL: Analyze how this paper supports, contradicts, or inspires the user's specific research idea. Provide actionable insights.}
+{極其重要：深度分析這篇論文如何支持、反駁或啟發用戶的具體研究想法。請結合論文細節，提出具體、可落地的借鑒建議或排雷預警（至少1-2段）。}
