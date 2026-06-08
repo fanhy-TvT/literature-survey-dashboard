@@ -3,9 +3,20 @@
 const fs = require('fs');
 const path = require('path');
 
+// 1. Parse command line arguments
+const args = process.argv.slice(2);
+const customTarget = args[0];
+
 const sourceDir = path.join(__dirname, '..');
-// Install to .trae/skills/literature-survey-dashboard in the user's current working directory
-const targetDir = path.join(process.cwd(), '.trae', 'skills', 'literature-survey-dashboard');
+
+// 2. Determine target directory
+// If the user provides a path, use it. Otherwise, default to `.trae/skills/literature-survey-dashboard` in their current working directory.
+let targetDir;
+if (customTarget) {
+  targetDir = path.resolve(process.cwd(), customTarget);
+} else {
+  targetDir = path.join(process.cwd(), '.trae', 'skills', 'literature-survey-dashboard');
+}
 
 function copyDirectory(src, dest) {
   if (!fs.existsSync(dest)) {
@@ -33,6 +44,12 @@ function copyDirectory(src, dest) {
 
 console.log(`\n🚀 Installing literature-survey-dashboard skill...`);
 console.log(`📂 Target directory: ${targetDir}`);
+
+if (!customTarget) {
+  console.log(`\n💡 Tip: You are installing to the default Trae directory.`);
+  console.log(`If you want to install it elsewhere, you can pass a custom path:`);
+  console.log(`   npx @fanhy-tvt/literature-survey-dashboard ./my-agent-folder/skills/literature-survey-dashboard`);
+}
 
 try {
   copyDirectory(sourceDir, targetDir);
