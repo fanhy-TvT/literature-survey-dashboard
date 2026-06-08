@@ -23,3 +23,6 @@ An autonomous AI agent skill that automates the entire workflow of academic pape
 1. Install or copy this skill into your AI Agent's skill directory (e.g., `.trae/skills/` or any other agent framework directory).
 2. Prompt your AI Agent: *"Use the literature-survey-dashboard skill to analyze the papers in `./papers` for my research on [Your Topic]."*
 3. The agent will autonomously execute the scripts, generate summaries, and present the final HTML dashboard.
+
+## License
+This project is licensed under the [MIT License](LICENSE).
