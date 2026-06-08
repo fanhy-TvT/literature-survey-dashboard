@@ -1,10 +1,13 @@
 {
-  "name": "literature-survey-dashboard",
+  "name": "@fanhy-tvt/literature-survey-dashboard",
   "version": "1.0.0",
   "description": "An autonomous AI agent skill that reads PDF papers, generates structured summaries, and compiles an interactive HTML comparison dashboard.",
   "main": "index.js",
   "bin": {
     "literature-survey-dashboard": "./bin/install.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
