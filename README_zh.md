@@ -21,3 +21,6 @@
 1. 将此技能安装或复制到你的 AI Agent 的技能目录中（例如 `.trae/skills/`）。
 2. 向你的 AI Agent 提问：“*使用 literature-survey-dashboard 技能，帮我分析 `./papers` 目录下的论文，我的研究方向是 [你的课题]。*”
 3. Agent 将自主执行脚本、生成摘要，并最终为你展示 HTML 仪表盘。
+
+## 许可证
+本项目采用 [MIT 许可证](LICENSE) 进行开源。
