@@ -19,10 +19,27 @@ An autonomous AI agent skill that automates the entire workflow of academic pape
 - `scripts/generate_dashboard.py`: Python script for generating the interactive HTML dashboard.
 - `templates/`: Markdown templates for structured paper summaries in multiple languages.
 
+## Installation
+
+You can install this skill into your AI Agent's workspace using one of the following methods:
+
+### Method 1: Using npx (Recommended)
+You can directly run the interactive installer using npm:
+```bash
+npx @fanhy-tvt/literature-survey-dashboard
+```
+The installer will interactively guide you to choose the installation location (Current Project or System Home Directory) and the target agent folder (e.g., `.trae`, `.agents`, `.claude`, etc.).
+
+### Method 2: Git Clone
+Clone this repository directly into your agent's skills folder:
+```bash
+cd /path/to/your/project/.trae/skills
+git clone https://github.com/fanhy-TvT/literature-survey-dashboard.git
+```
+
 ## How to Use
-1. Install or copy this skill into your AI Agent's skill directory (e.g., `.trae/skills/` or any other agent framework directory).
-2. Prompt your AI Agent: *"Use the literature-survey-dashboard skill to analyze the papers in `./papers` for my research on [Your Topic]."*
-3. The agent will autonomously execute the scripts, generate summaries, and present the final HTML dashboard.
+1. After installation, prompt your AI Agent: *"Use the literature-survey-dashboard skill to analyze the papers in `./papers` for my research on [Your Topic]."*
+2. The agent will autonomously execute the scripts, generate summaries, and present the final HTML dashboard.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
