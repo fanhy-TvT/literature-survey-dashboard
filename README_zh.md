@@ -17,10 +17,27 @@
 - `scripts/generate_dashboard.py`：用于生成交互式 HTML 仪表盘的 Python 脚本。
 - `templates/`：多语言的结构化论文摘要 Markdown 模板。
 
+## 安装说明
+
+你可以通过以下两种方式之一将该技能安装到你的 AI Agent 工作区中：
+
+### 方式 1：使用 npx (推荐)
+你可以直接使用 npm 运行交互式安装程序：
+```bash
+npx @fanhy-tvt/literature-survey-dashboard
+```
+安装程序会通过交互式提示，引导你选择安装位置（当前项目或系统主目录）以及目标代理文件夹（例如 `.trae`, `.agents`, `.claude` 等）。
+
+### 方式 2：直接克隆 (Git Clone)
+将此仓库直接克隆到你的 agent 的技能目录中：
+```bash
+cd /path/to/your/project/.trae/skills
+git clone https://github.com/fanhy-TvT/literature-survey-dashboard.git
+```
+
 ## 如何使用
-1. 将此技能安装或复制到你的 AI Agent 的技能目录中（例如 `.trae/skills/`）。
-2. 向你的 AI Agent 提问：“*使用 literature-survey-dashboard 技能，帮我分析 `./papers` 目录下的论文，我的研究方向是 [你的课题]。*”
-3. Agent 将自主执行脚本、生成摘要，并最终为你展示 HTML 仪表盘。
+1. 安装完成后，向你的 AI Agent 提问：“*使用 literature-survey-dashboard 技能，帮我分析 `./papers` 目录下的论文，我的研究方向是 [你的课题]。*”
+2. Agent 将自主执行脚本、生成摘要，并最终为你展示 HTML 仪表盘。
 
 ## 许可证
 本项目采用 [MIT 许可证](LICENSE) 进行开源。
