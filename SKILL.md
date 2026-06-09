@@ -38,7 +38,17 @@ When invoked, act as an autonomous research assistant and follow these steps. **
 - Find **6-10** recent (last 2-3 years) and highly impactful papers that are NOT in the local directory. Dig deep into the literature tree.
 - Generate the same strictly detailed Markdown summaries for these newly found papers, using the user's language.
 
-### 3. Generate HTML Dashboard
+### 3. Generate Global Synthesis Report
+- After generating all individual paper summaries, you MUST create a single global synthesis report (e.g., `global_summary.md`) that deeply integrates the insights from all papers.
+- **CRITICAL**: Use the global templates provided in this skill's `templates/` directory based on the user's language:
+  - `global_template_en.md` for English
+  - `global_template_zh.md` for Simplified Chinese
+  - `global_template_zh-tw.md` for Traditional Chinese
+  - `global_template_ja.md` for Japanese
+- **Citations Required**: You MUST correctly cite the specific papers (e.g., "Dohare et al., 2024") when mentioning insights, methods, or risks.
+- **Synthesis Focus**: This report MUST heavily synthesize and summarize the "Relevance to User's Idea" sections from the individual summaries. Do not just list the papers; synthesize the knowledge to provide actionable advice.
+
+### 4. Generate HTML Dashboard
 - Execute the script `scripts/generate_dashboard.py` (located in this skill's directory) to parse the Markdown summaries and generate the interactive HTML file.
 - Example: `python path/to/skill/scripts/generate_dashboard.py --input_dir <summaries_dir> --output_file paper_comparison.html --lang <en|zh|zh-tw|ja>`
 - Start a local HTTP server (e.g., `python -m http.server 8080`) in a non-blocking terminal and use the `OpenPreview` tool to show the dashboard to the user.
