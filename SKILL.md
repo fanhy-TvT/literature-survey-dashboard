@@ -50,8 +50,8 @@ When invoked, act as an autonomous research assistant and follow these steps. **
 
 ### 4. Generate HTML Dashboard
 - Execute the script `scripts/generate_dashboard.py` (located in this skill's directory) to parse the Markdown summaries and generate the interactive HTML file.
-- Example: `python path/to/skill/scripts/generate_dashboard.py --input_dir <summaries_dir> --output_file paper_comparison.html --lang <en|zh|zh-tw|ja>`
-- The dashboard will now automatically include a link to the `global_summary.md` file, so the user can open it directly from the dashboard.
+- Example: `python path/to/skill/scripts/generate_dashboard.py --input_dir <summaries_dir> --output_file paper_comparison.html --lang <en|zh|zh-tw|ja> --global_summary <summaries_dir>/global_summary.md`
+- The script will automatically ignore the `global_summary.md` for the table row generation, and convert the `global_summary.md` into a well-formatted, UTF-8 encoded `global_summary.html` which is linked directly from the dashboard.
 - Start a local HTTP server (e.g., `python -m http.server 8080`) in a non-blocking terminal and use the `OpenPreview` tool to show the dashboard to the user.
 
 ## Important Notes
