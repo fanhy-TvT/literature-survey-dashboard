@@ -188,13 +188,13 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
             .section-title {{ font-weight: bold; color: #495057; margin-bottom: 4px; display: inline-block; padding-top: 8px; }}
             .section-title:first-child {{ padding-top: 0; }}
             /* Custom Scrollbar */
-            ::-webkit-scrollbar { width: 6px; height: 6px; }
-            ::-webkit-scrollbar-track { background: #f1f1f1; }
-            ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
-            ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
-            .global-btn { background: #28a745; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px; transition: background 0.2s; }
-            .global-btn:hover { background: #218838; }
-            .search-container { display: flex; align-items: center; gap: 15px; }
+            ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
+            ::-webkit-scrollbar-track {{ background: #f1f1f1; }}
+            ::-webkit-scrollbar-thumb {{ background: #c1c1c1; border-radius: 4px; }}
+            ::-webkit-scrollbar-thumb:hover {{ background: #a8a8a8; }}
+            .global-btn {{ background: #28a745; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px; transition: background 0.2s; }}
+            .global-btn:hover {{ background: #218838; }}
+            .search-container {{ display: flex; align-items: center; gap: 15px; }}
         </style>
     </head>
     <body>
