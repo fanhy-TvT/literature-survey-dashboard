@@ -23,7 +23,7 @@ def md_to_html(text):
     text = re.sub(r'\*(.*?)\*', r'<em>\1</em>', text)
     return text
 
-def generate_dashboard(summaries_dir, output_file, lang='en'):
+def generate_dashboard(summaries_dir, output_file, lang='en', global_summary_path=None):
     papers = []
     
     # Define section mappings based on language
@@ -69,8 +69,12 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
     # Fallback to English if lang not found
     lang_keys = sections.get(lang, sections['en'])
     
+    global_summary_basename = os.path.basename(global_summary_path) if global_summary_path else 'global_summary.md'
+    
     for filename in os.listdir(summaries_dir):
         if not filename.endswith('.md'):
+            continue
+        if filename == global_summary_basename:
             continue
             
         with open(os.path.join(summaries_dir, filename), 'r', encoding='utf-8') as f:
@@ -204,7 +208,7 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
                 <input type="text" id="searchInput" class="search-box" placeholder="{texts['search_placeholder']}">
                 <div>{texts['total_papers']} <strong id="count" style="color:#007bff; font-size: 1.2em;"></strong> {texts['papers_unit']}</div>
             </div>
-            <a href="global_summary.md" class="global-btn" target="_blank">{texts['global_report']}</a>
+            <a href="global_summary.html" class="global-btn" target="_blank">{texts['global_report']}</a>
         </div>
         <div class="table-container">
             <table>
@@ -283,12 +287,55 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
         f.write(html_template)
     
     print(f"Generated HTML dashboard at {output_file}")
+    
+    # Also generate an HTML wrapper for global_summary to fix encoding issues in browsers
+    if global_summary_path and os.path.exists(global_summary_path):
+        with open(global_summary_path, 'r', encoding='utf-8') as f:
+            global_content = f.read()
+        
+        safe_content = global_content.replace('</textarea>', '&lt;/textarea&gt;')
+        global_html = f"""<!DOCTYPE html>
+<html lang="{lang}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{texts['global_report']}</title>
+    <style>
+        body {{ font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 40px 20px; color: #333; }}
+        h1, h2, h3, h4 {{ color: #2c3e50; margin-top: 1.5em; }}
+        h1, h2 {{ border-bottom: 1px solid #eee; padding-bottom: 10px; }}
+        code {{ background: #f4f4f4; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 0.9em; color: #d63384; }}
+        pre {{ background: #f4f4f4; padding: 15px; border-radius: 8px; overflow-x: auto; }}
+        pre code {{ color: inherit; background: transparent; padding: 0; }}
+        blockquote {{ border-left: 4px solid #007bff; margin: 0 0 1em 0; padding-left: 15px; color: #555; background: #f8f9fa; padding: 10px 15px; border-radius: 0 4px 4px 0; }}
+        table {{ border-collapse: collapse; width: 100%; margin: 1em 0; }}
+        th, td {{ border: 1px solid #ddd; padding: 8px 12px; text-align: left; }}
+        th {{ background-color: #f4f4f4; }}
+        a {{ color: #007bff; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
+    </style>
+</head>
+<body>
+    <div id="content">Loading report...</div>
+    <textarea id="markdown-source" style="display:none;">{safe_content}</textarea>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        document.getElementById('content').innerHTML = marked.parse(document.getElementById('markdown-source').value);
+    </script>
+</body>
+</html>"""
+        out_dir = os.path.dirname(output_file)
+        global_html_path = os.path.join(out_dir, 'global_summary.html')
+        with open(global_html_path, 'w', encoding='utf-8') as f:
+            f.write(global_html)
+        print(f"Generated HTML global summary at {global_html_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Generate HTML Dashboard from Markdown summaries')
     parser.add_argument('--input_dir', required=True, help='Directory containing markdown summaries')
     parser.add_argument('--output_file', required=True, help='Output HTML file path')
     parser.add_argument('--lang', default='en', choices=['en', 'zh', 'zh-tw', 'ja'], help='Language for the dashboard UI')
+    parser.add_argument('--global_summary', default=None, help='Path to the global summary markdown file')
     args = parser.parse_args()
     
-    generate_dashboard(args.input_dir, args.output_file, args.lang)
+    generate_dashboard(args.input_dir, args.output_file, args.lang, args.global_summary)
