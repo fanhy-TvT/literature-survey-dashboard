@@ -2,11 +2,14 @@ import os
 import re
 import argparse
 
-def get_section(content, section_names):
+def get_section(content, section_names, is_last=False):
     """Extracts content between a section header and the next section header."""
     for name in section_names:
         # Match both **Section** and **Section (English)** formats
-        pattern = r'\*\*(?:' + re.escape(name) + r')(?:\s*\([^)]+\))?\*\*:\s*(.*?)(?=\n\*\*|$)'
+        if is_last:
+            pattern = r'\*\*(?:' + re.escape(name) + r')(?:\s*\([^)]+\))?\*\*:\s*(.*)'
+        else:
+            pattern = r'\*\*(?:' + re.escape(name) + r')(?:\s*\([^)]+\))?\*\*:\s*(.*?)(?=\n\*\*|$)'
         m = re.search(pattern, content, re.S)
         if m:
             return m.group(1).strip()
@@ -84,7 +87,7 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
             'details': get_section(content, lang_keys['details']),
             'results': get_section(content, lang_keys['results']),
             'summary': get_section(content, lang_keys['summary']),
-            'relevance': get_section(content, lang_keys['relevance'])
+            'relevance': get_section(content, lang_keys['relevance'], is_last=True)
         })
 
     # UI Strings based on language
@@ -94,6 +97,7 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
             'search_placeholder': '🔍 搜索论文标题、作者或核心关键词...',
             'total_papers': '共展示',
             'papers_unit': '篇相关文献',
+            'global_report': '📄 打开全局综合报告 (Global Report)',
             'col_paper': '论文标题 / 作者',
             'col_motivation': '研究动机 (Motivation)',
             'col_method': '核心方法与细节 (Method & Details)',
@@ -109,6 +113,7 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
             'search_placeholder': '🔍 搜尋論文標題、作者或核心關鍵字...',
             'total_papers': '共展示',
             'papers_unit': '篇相關文獻',
+            'global_report': '📄 打開全局綜合報告 (Global Report)',
             'col_paper': '論文標題 / 作者',
             'col_motivation': '研究動機 (Motivation)',
             'col_method': '核心方法與細節 (Method & Details)',
@@ -124,6 +129,7 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
             'search_placeholder': '🔍 タイトル、著者、キーワードを検索...',
             'total_papers': '表示中',
             'papers_unit': '件の関連論文',
+            'global_report': '📄 グローバル統合レポートを開く (Global Report)',
             'col_paper': '論文タイトル / 著者',
             'col_motivation': '研究の動機 (Motivation)',
             'col_method': '提案手法と詳細 (Method & Details)',
@@ -139,6 +145,7 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
             'search_placeholder': '🔍 Search titles, authors, or keywords...',
             'total_papers': 'Showing',
             'papers_unit': 'relevant papers',
+            'global_report': '📄 Open Global Synthesis Report',
             'col_paper': 'Title / Author',
             'col_motivation': 'Motivation',
             'col_method': 'Method & Details',
@@ -181,17 +188,23 @@ def generate_dashboard(summaries_dir, output_file, lang='en'):
             .section-title {{ font-weight: bold; color: #495057; margin-bottom: 4px; display: inline-block; padding-top: 8px; }}
             .section-title:first-child {{ padding-top: 0; }}
             /* Custom Scrollbar */
-            ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
-            ::-webkit-scrollbar-track {{ background: #f1f1f1; }}
-            ::-webkit-scrollbar-thumb {{ background: #c1c1c1; border-radius: 4px; }}
-            ::-webkit-scrollbar-thumb:hover {{ background: #a8a8a8; }}
+            ::-webkit-scrollbar { width: 6px; height: 6px; }
+            ::-webkit-scrollbar-track { background: #f1f1f1; }
+            ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+            ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+            .global-btn { background: #28a745; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px; transition: background 0.2s; }
+            .global-btn:hover { background: #218838; }
+            .search-container { display: flex; align-items: center; gap: 15px; }
         </style>
     </head>
     <body>
         <h1>{texts['title']}</h1>
         <div class="controls">
-            <input type="text" id="searchInput" class="search-box" placeholder="{texts['search_placeholder']}">
-            <div>{texts['total_papers']} <strong id="count" style="color:#007bff; font-size: 1.2em;"></strong> {texts['papers_unit']}</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-box" placeholder="{texts['search_placeholder']}">
+                <div>{texts['total_papers']} <strong id="count" style="color:#007bff; font-size: 1.2em;"></strong> {texts['papers_unit']}</div>
+            </div>
+            <a href="global_summary.md" class="global-btn" target="_blank">{texts['global_report']}</a>
         </div>
         <div class="table-container">
             <table>
